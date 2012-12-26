@@ -35,21 +35,9 @@ public final class SetCPU {
 		new CPUChanger().execute(new String[] {governor, String.valueOf(cpu),"scaling_governor"});
 	}
 	
-	@SuppressLint("NewApi")
 	private static class CPUChanger extends AsyncTask<String, Void, String>
 	{
 
-		/*Context context;
-
-		public FrequencyChanger(Context context)
-		{
-			this.context = context;
-			preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-		}*/
-		
-
-		//SharedPreferences preferences;
 		@Override
 		protected String doInBackground(String... args)
 		{
