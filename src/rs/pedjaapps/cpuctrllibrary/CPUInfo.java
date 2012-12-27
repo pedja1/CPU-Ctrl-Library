@@ -68,6 +68,11 @@ public final class CPUInfo {
 	public static final String CPU3_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu3/online"; 
 	public static final String CPU_INFO_FILE_PATH = "/proc/cpuinfo";
 
+	public static final String TIMES_IN_STATE_CPU0_FILE_PATH = "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state";
+	public static final String TIMES_IN_STATE_CPU1_FILE_PATH = "/sys/devices/system/cpu/cpu1/cpufreq/stats/time_in_state";
+	public static final String TIMES_IN_STATE_CPU2_FILE_PATH = "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state";
+	public static final String TIMES_IN_STATE_CPU3_FILE_PATH = "/sys/devices/system/cpu/cpu3/cpufreq/stats/time_in_state";
+
 	/**
 	 * Get List of frequencies from /sys filesystem
 	 * @return list of frequencies as List<Integer>*/
@@ -961,6 +966,38 @@ public final class CPUInfo {
 
 		}
 		return cpu;
+	}
+	
+	/**
+	 * Retrieves times in state from "times_in_state"
+	 * @return Custom list with 2 fields: frequency and time*/
+	public static  List<TimesInState> getTimesInState()
+	{
+		List<TimesInState> times = new ArrayList<TimesInState>();
+
+		try
+		{
+
+			FileInputStream fstream = new FileInputStream(TIMES_IN_STATE_CPU0_FILE_PATH);
+
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+
+			while ((strLine = br.readLine()) != null)
+			{	
+				String[] delims = strLine.split(" ");
+				times.add(new TimesInState(Integer.parseInt(delims[0]), Long.parseLong(delims[1])));
+			}
+
+			in.close();
+		}
+		catch (Exception e)
+		{
+		}
+		
+		return times;
+
 	}
 	
 }
