@@ -66,7 +66,7 @@ public final class CPUInfo {
 	public static final String CPU1_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu1/online"; 
 	public static final String CPU2_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu2/online"; 
 	public static final String CPU3_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu3/online"; 
-
+	public static final String CPU_INFO_FILE_PATH = "/proc/cpuinfo";
 
 	/**
 	 * Get List of frequencies from /sys filesystem
@@ -927,6 +927,38 @@ public final class CPUInfo {
 		}
 		else{
 		
+		}
+		return cpu;
+	}
+	
+	/**
+	 * Gets cpu information from "/proc/cpuinfo"
+	 * @return String*/
+	
+	public static String getCPUInfo(){
+		String cpu = null;
+		
+		try
+		{
+
+			File myFile = new File(CPU_INFO_FILE_PATH);
+			FileInputStream fIn = new FileInputStream(myFile);
+
+			BufferedReader myReader = new BufferedReader(
+				new InputStreamReader(fIn));
+			String aDataRow = "";
+			String aBuffer = "";
+			while ((aDataRow = myReader.readLine()) != null)
+			{
+				aBuffer += aDataRow + "\n";
+			}
+			cpu = aBuffer.trim();
+			myReader.close();
+
+		}
+		catch (Exception e)
+		{
+
 		}
 		return cpu;
 	}
