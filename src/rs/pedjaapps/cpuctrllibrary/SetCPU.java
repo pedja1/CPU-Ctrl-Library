@@ -50,6 +50,13 @@ public final class SetCPU {
 		new CPUChanger().execute(new String[] {governor, String.valueOf(cpu),"scaling_governor"});
 	}
 	
+	/**
+	 * Enable CPU temperature
+	 */
+	public static void enableTempMonitor(){
+		new enableTempMonitor().execute();
+	}
+	
 	private static class CPUChanger extends AsyncTask<String, Void, String>
 	{
 
@@ -95,6 +102,51 @@ public final class SetCPU {
 		}
 	}	
 
+	private static class enableTempMonitor extends AsyncTask<String, Void, Object>
+	{
 
+
+		@Override
+		protected Object doInBackground(String... args)
+		{
+
+			
+			try {
+	            String line;
+	            Process process = Runtime.getRuntime().exec("su");
+	            OutputStream stdin = process.getOutputStream();
+	            InputStream stderr = process.getErrorStream();
+	            InputStream stdout = process.getInputStream();
+
+	            stdin.write(("chmod 777 /sys/devices/virtual/thermal/thermal_zone1/mode\n").getBytes());
+	            stdin.write(("chmod 777 /sys/devices/virtual/thermal/thermal_zone0/mode\n").getBytes());
+	            stdin.write(("echo -n enabled > /sys/devices/virtual/thermal/thermal_zone1/mode\n").getBytes());
+	            stdin.write(("echo -n enabled > /sys/devices/virtual/thermal/thermal_zone0/mode\n").getBytes());
+		           
+	            stdin.flush();
+
+	            stdin.close();
+	            BufferedReader brCleanUp =
+	                    new BufferedReader(new InputStreamReader(stdout));
+	            while ((line = brCleanUp.readLine()) != null) {
+	                Log.d("[CCL Output]", line);
+	            }
+	            brCleanUp.close();
+	            brCleanUp =
+	                    new BufferedReader(new InputStreamReader(stderr));
+	            while ((line = brCleanUp.readLine()) != null) {
+	            	Log.e("[CCL Error]", line);
+	            }
+	            brCleanUp.close();
+
+	        } catch (IOException ex) {
+	        }
+
+			return "";
+		}
+
+
+
+	}
 	
 }
