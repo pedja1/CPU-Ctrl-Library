@@ -29,6 +29,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.os.SystemClock;
+
 
 
 
@@ -998,6 +1000,84 @@ public final class CPUInfo {
 		
 		return times;
 
+	}
+	/**
+	 * Retrieves milliseconds since boot, including time spent in sleep.
+	 * @return time since boot converted in human readable format (6h:45m:56s)*/
+	public static String getUptime()
+	{
+		String uptime;
+
+		int time =(int) SystemClock.elapsedRealtime();
+
+
+		String s = String.valueOf((int)((time / 1000) % 60));
+		String m = String.valueOf((int)((time / (1000 * 60)) % 60));
+		String h = String.valueOf((int)((time / (1000 * 3600)) % 24));
+		String d = String.valueOf((int)(time / (1000 * 60 * 60 * 24)));
+		StringBuilder builder = new StringBuilder();
+		if (!d.equals("0"))
+		{
+			builder.append(d + "d:");
+
+		}
+		if (!h.equals("0"))
+		{
+			builder.append(h + "h:");
+
+		}
+		if (!m.equals("0"))
+		{
+			builder.append(m + "m:");
+
+		}
+
+		builder.append(s + "s");
+
+
+		uptime = builder.toString();
+
+		return uptime;
+
+
+	}
+	/**
+	 * Retrieves milliseconds spent in sleep.
+	 * @return time since boot converted in human readable format (6h:45m:56s)*/
+	
+	public static String getDeepSleep()
+	{
+		String deepSleep;
+
+		int time =(int) (SystemClock.elapsedRealtime() - SystemClock.uptimeMillis());
+
+		String s = String.valueOf((int)((time / 1000) % 60));
+	    String m = String.valueOf((int)((time / (1000 * 60)) % 60));
+		String h = String.valueOf((int)((time / (1000 * 3600)) % 24));
+		String d = String.valueOf((int)(time / (1000 * 60 * 60 * 24)));
+		StringBuilder builder = new StringBuilder();
+		if (!d.equals("0"))
+		{
+			builder.append(d + "d:");
+
+		}
+		if (!h.equals("0"))
+		{
+			builder.append(h + "h:");
+
+		}
+		if (!m.equals("0"))
+		{
+			builder.append(m + "m:");
+
+		}
+
+		builder.append(s + "s");
+
+
+		deepSleep = builder.toString();
+
+		return deepSleep;
 	}
 	
 }
