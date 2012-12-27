@@ -1080,4 +1080,41 @@ public final class CPUInfo {
 		return deepSleep;
 	}
 	
+	/**
+	 * It may be required to enable cpu temperature monitor before reading temperature
+	 * To do so call enableTempMonitor from class SetCPU
+	 * 
+	 * @return CPU temperature in Celsius or null if temperature not available
+	 * */
+	public static Integer getCpuTemp()
+	{
+		Integer cpuTemp = null;
+		try
+		{
+
+			File myFile = new File(
+				"/sys/class/thermal/thermal_zone1/temp");
+			FileInputStream fIn = new FileInputStream(myFile);
+
+			BufferedReader myReader = new BufferedReader(new InputStreamReader(
+															 fIn));
+			String aDataRow = "";
+			String aBuffer = "";
+			while ((aDataRow = myReader.readLine()) != null)
+			{
+				aBuffer += aDataRow + "\n";
+			}
+
+			cpuTemp = Integer.parseInt(aBuffer.trim());
+
+			myReader.close();
+
+		}
+		catch (Exception e2)
+		{
+		}
+
+		return cpuTemp;
+	}
+	
 }
