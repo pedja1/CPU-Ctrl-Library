@@ -62,6 +62,12 @@ public final class CPUInfo {
 	private static final String CPU2_CURR_GOV_FILE_PATH = "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor";
 	private static final String CPU3_CURR_GOV_FILE_PATH = "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor";
 
+	public static final String CPU0_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu0/online"; 
+	public static final String CPU1_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu1/online"; 
+	public static final String CPU2_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu2/online"; 
+	public static final String CPU3_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu3/online"; 
+
+
 	/**
 	 * Get List of frequencies from /sys filesystem
 	 * @return list of frequencies as List<Integer>*/
@@ -848,5 +854,81 @@ public final class CPUInfo {
 		  }
 		}
 	
+	/**
+	 * Checks if CPU0 is available
+	 * @return true if cpu0 is available false if cpu0 is not available*/
+	public static boolean isCpu0Available()
+	{
+		boolean i = false;
+		if (new File(CPU0_ONLINE_FILEPATH).exists())
+		{
+			i = true;
+		}
+		return i;
+
+	}
+	/**
+	 * Checks if CPU1 is available
+	 * @return true if cpu1 is available false if cpu1 is not available*/
+	
+	public static boolean isCpu1Available()
+	{
+		boolean i = false;
+		if (new File(CPU1_ONLINE_FILEPATH).exists())
+		{
+			i = true;
+		}
+		return i;
+
+	}
+	/**
+	 * Checks if CPU2 is available
+	 * @return true if cpu2 is available false if cpu2 is not available*/
+	
+	public static boolean isCpu2Available()
+	{
+		boolean i = false;
+		if (new File(CPU2_ONLINE_FILEPATH).exists())
+		{
+			i = true;
+		}
+		return i;
+
+	}
+	/**
+	 * Checks if CPU3 is available
+	 * @return true if cpu3 is available false if cpu3 is not available*/
+	
+	public static boolean isCpu3Available()
+	{
+		boolean i = false;
+		if (new File(CPU3_ONLINE_FILEPATH).exists())
+		{
+			i = true;
+		}
+		return i;
+
+	}
+	
+	/**
+	 * Gets number of available CPUs
+	 * @return Number of available CPUs or null*/
+	
+	public static Integer getNumberOfCPUs(){
+		Integer cpu = null;
+		if(isCpu3Available()){
+			cpu = 4;
+		}
+		else if(isCpu1Available() && isCpu3Available()==false){
+			cpu = 2;
+		}
+		else if(isCpu1Available()==false && isCpu3Available()==false ){
+			cpu = 1;
+		}
+		else{
+		
+		}
+		return cpu;
+	}
 	
 }
