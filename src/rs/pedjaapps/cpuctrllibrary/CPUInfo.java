@@ -64,16 +64,16 @@ public final class CPUInfo {
 	private static final String CPU2_CURR_GOV_FILE_PATH = "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor";
 	private static final String CPU3_CURR_GOV_FILE_PATH = "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor";
 
-	public static final String CPU0_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu0/online"; 
-	public static final String CPU1_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu1/online"; 
-	public static final String CPU2_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu2/online"; 
-	public static final String CPU3_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu3/online"; 
-	public static final String CPU_INFO_FILE_PATH = "/proc/cpuinfo";
+	private static final String CPU0_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu0/online"; 
+	private static final String CPU1_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu1/online"; 
+	private static final String CPU2_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu2/online"; 
+	private static final String CPU3_ONLINE_FILEPATH = "/sys/devices/system/cpu/cpu3/online"; 
+	private static final String CPU_INFO_FILE_PATH = "/proc/cpuinfo";
 
-	public static final String TIMES_IN_STATE_CPU0_FILE_PATH = "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state";
-	public static final String TIMES_IN_STATE_CPU1_FILE_PATH = "/sys/devices/system/cpu/cpu1/cpufreq/stats/time_in_state";
-	public static final String TIMES_IN_STATE_CPU2_FILE_PATH = "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state";
-	public static final String TIMES_IN_STATE_CPU3_FILE_PATH = "/sys/devices/system/cpu/cpu3/cpufreq/stats/time_in_state";
+	private static final String TIMES_IN_STATE_CPU0_FILE_PATH = "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state";
+	private static final String TIMES_IN_STATE_CPU1_FILE_PATH = "/sys/devices/system/cpu/cpu1/cpufreq/stats/time_in_state";
+	private static final String TIMES_IN_STATE_CPU2_FILE_PATH = "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state";
+	private static final String TIMES_IN_STATE_CPU3_FILE_PATH = "/sys/devices/system/cpu/cpu3/cpufreq/stats/time_in_state";
 
 	/**
 	 * Get List of frequencies from /sys filesystem
