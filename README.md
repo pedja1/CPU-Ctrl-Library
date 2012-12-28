@@ -110,7 +110,7 @@ This class uses AsyncTask class for executing root commands in the background
 	
 	
 You can either download pre compiled .jar library or clone this git and use it as library project
-	
+Example is here: https://github.com/pedja1/CPU-Control-Library-Example
 	
 	
 	
